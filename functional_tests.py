@@ -1,12 +1,24 @@
 # -*- coding: utf-8 -*-
 """
 Created on Sat Dec 22 10:59:27 2018
-
 @author: RuoqinLo
 """
 
 from selenium import webdriver
-browser =webdriver.Chrome("./chromedriver")
-browser.get("http://localhost:8000")
+import unittest
 
-assert "django" in browser.title
+class NewVisitorTest(unittest.TestCase):
+    def setUp(self):
+        self.browser = webdriver.Chrome("./chromedriver")
+        self.browser.implicitly_wait(3)
+    def tearDown(self):
+        self.browser.quit()
+    
+    def test_can_start_a_list_and_retrieve_it_later(self):
+        self.browser.get("http://localhost:8000")
+        
+        self.assertIn('To-do', self.browser.title)
+        self.fail('Finish the test!')
+        
+if __name__=='__main__':
+    unittest.main(warnings='ignore')
