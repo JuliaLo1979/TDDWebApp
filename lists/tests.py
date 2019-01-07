@@ -6,6 +6,7 @@ from lists.views import home_page
 
 # Create your tests here.
 class HomePageTest(TestCase):
+#第1個django裡的測試-用django的resolve看開的網頁根目錄,是否是home_page
     def test_root_url_resolver_to_homepage_view(self):
         found = resolve('/')
         self.assertEqual(found.func, home_page)
